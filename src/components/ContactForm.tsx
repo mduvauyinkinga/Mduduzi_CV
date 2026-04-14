@@ -1,40 +1,75 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import emailjs from '@emailjs/browser';
 
-interface EmailJSData {
+interface FormData {
   from_name: string;
   from_email: string;
   message: string;
 }
 
 const ContactForm = () => {
-  const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<EmailJSData>({ from_name: '', from_email: '', message: '' });
+  const [formData, setFormData] = useState<FormData>({ from_name: '', from_email: '', message: '' });
   const { toast } = useToast();
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
+
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      // Replace with your EmailJS credentials
-      await emailjs.send(
-        'YOUR_SERVICE_ID',  // e.g. 'service_abc123'
-        'YOUR_TEMPLATE_ID', // e.g. 'template_def456'
-        formData as Record<string, unknown>,
-        'YOUR_PUBLIC_KEY'   // e.g. 'user_ghi789'
-      );
+    // Basic validation
+    if (!formData.from_name.trim() || !formData.from_email.trim() || !formData.message.trim()) {
       toast({
-        title: "Success!",
-        description: "Message sent successfully. I'll get back to you soon!",
+        title: "Error",
+        description: "Please fill all fields.",
+        variant: "destructive",
       });
-      setFormData({ from_name: '', from_email: '', message: '' });
+      setLoading(false);
+      return;
+    }
+    if (!validateEmail(formData.from_email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email.",
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const fd = new FormData();
+      fd.append('from_name', formData.from_name);
+      fd.append('from_email', formData.from_email);
+      fd.append('message', formData.message);
+      // Honeypot (spam trap)
+      fd.append('_gotcha', '');
+
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: fd,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Success!",
+          description: "Message sent successfully. I'll get back to you soon!",
+        });
+        // formRef.current.reset(); // Removed as form state managed manually
+        setFormData({ from_name: '', from_email: '', message: '' });
+      } else {
+        throw new Error('Form submission failed');
+      }
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: "Failed to send message. Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -43,7 +78,9 @@ const ContactForm = () => {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+      {/* Honeypot field for spam protection - hidden from humans */}
+      <input type="text" name="_gotcha" value="" style={{display: 'none'}} aria-hidden="true" tabIndex={-1} />
       <div>
         <label htmlFor="name" className="block text-sm font-medium mb-2">
           Name

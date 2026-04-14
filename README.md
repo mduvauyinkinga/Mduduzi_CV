@@ -58,6 +58,32 @@ Form sends emails to your address without backend server.
 
 ## Deployment
 
+**GitHub Pages:**
+```
+npm run build
+git add dist
+git commit -m "Deploy to gh-pages"
+git subtree push --prefix dist origin gh-pages
+```
+
+**Vercel/Netlify:**
+1. Connect repo
+2. Build: `npm run build`
+3. Output: `dist`
+4. (Optional) EmailJS env vars
+
+**Preview locally:**
+```
+npm run build
+npm run preview
+```
+
+**Notes:**
+- Uses `base: "./"` for subpath deploys (gh-pages).
+- BrowserRouter for SPA routing.
+- All client-side, no server needed.
+## Deployment
+
 - **Vercel/Netlify:** Auto-deploys static build + EmailJS works client-side.
 - `npm run build` → upload `dist/`
 
