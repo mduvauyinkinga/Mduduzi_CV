@@ -89,30 +89,34 @@ formData.message.trim()
           Name *
         </label>
           <input
-          id="name"
-          type="text"
-          placeholder="Full Name"
-          required
-          value={formData.from_name}
-          onChange={(e) => setFormData({ ...formData, from_name: e.target.value })}
-          className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:bg-muted disabled:text-muted-foreground"
-          disabled={loading}
-        />
+            id="name"
+            name="from_name"
+            type="text"
+            autoComplete="name"
+            placeholder="Full Name"
+            required
+            value={formData.from_name}
+            onChange={(e) => setFormData({ ...formData, from_name: e.target.value })}
+            className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:bg-muted disabled:text-muted-foreground"
+            disabled={loading}
+          />
       </div>
       <div>
         <label htmlFor="email" className="block text-sm font-medium mb-2">
           Email
         </label>
           <input
-          id="email"
-          type="email"
-          placeholder="Enter Email"
-          required
-          value={formData.from_email}
-          onChange={(e) => setFormData({ ...formData, from_email: e.target.value })}
-          className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:bg-muted disabled:text-muted-foreground"
-          disabled={loading}
-        />
+            id="email"
+            name="from_email"
+            type="email"
+            autoComplete="email"
+            placeholder="Enter Email"
+            required
+            value={formData.from_email}
+            onChange={(e) => setFormData({ ...formData, from_email: e.target.value })}
+            className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:bg-muted disabled:text-muted-foreground"
+            disabled={loading}
+          />
       </div>
       <div>
         <label htmlFor="message" className="block text-sm font-medium mb-2">
