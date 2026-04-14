@@ -22,8 +22,8 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
 
     // Sanitize inputs (remove HTML/script, limit length)
     const sanitizedName = formData.from_name.trim().replace(/[<>]/g, '').slice(0, 100);
-    const sanitizedEmail = formData.from_email.trim().slice(0, 100);
-    const sanitizedMessage = formData.from_message.trim().replace(/[<>]/g, '').slice(0, 2000);
+
+formData.message.trim()
     if (!sanitizedName || !sanitizedEmail || !sanitizedMessage) {
       toast({
         title: "Error",
@@ -83,7 +83,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
       {/* Honeypot field for spam protection - hidden from humans */}
-      <input type="text" name="_gotcha" value="" style={{display: 'none'}} aria-hidden="true" tabIndex={-1} />
+      <input type="text" name="_gotcha" defaultValue="" style={{display: 'none'}} aria-hidden="true" tabIndex={-1} readOnly />
       <div>
       <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
           Name *
