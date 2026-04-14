@@ -16,23 +16,24 @@ const projects: Project[] = [
     title: "Smokey Dreamz - NEW CONCEPT",
     description: "A full-stack solution with Map Embedded Information on Location, real-time inventory management, payment processing.",
     tags: ["React", "Node.js", "TypeScript JSX"],
-    videoUrl: "C:/Users/dnmdu/Documents/Smokey Dreamz/public/images/Smokey Dreamz.mp4",
-    liveUrl: "https://example.com",
+    videoUrl: "/videos/Smokey Dreamz.mp4",
+    liveUrl: "https://github.com/mduvauyinkinga/smokey-dreamz-prototype",
     thumbnailColor: "from-amber-500/20 to-orange-600/20",
   },
   {
-    title: "Task Management App",
-    description: "A collaborative task management tool with real-time updates, drag-and-drop, and team workspaces.",
+    title: "Earthy Vape Emporium - unfinished",
+    description: "A Vape Premium store, where customers can buy Premium Vape",
     tags: ["TypeScript", "Next.js", "Supabase"],
-videoUrl: "/videos/Smokey Dreamz.mp4",
-    liveUrl: "https://example.com",
+    videoUrl: "/videos/Earthy Vape Emporium.mp4",
+    liveUrl: "https://github.com/mduvauyinkinga/earthy-vape-emporium-prototype",
     thumbnailColor: "from-blue-500/20 to-cyan-600/20",
   },
   {
-    title: "Portfolio Website",
-    description: "A beautifully designed personal portfolio with smooth animations and responsive design.",
+    title: "FriendsofTUT Website",
+    description: "A Student-based website, showcasing a movement brought together by students, for students at eMalahleni Campus",
     tags: ["React", "Tailwind", "Framer Motion"],
-    liveUrl: "https://example.com",
+    videoUrl: "/videos/FRIENDSofTUT.mp4",
+    liveUrl: "https://github.com/mduvauyinkinga/friends-of-tut",
     thumbnailColor: "from-purple-500/20 to-pink-600/20",
   },
 ];
@@ -51,27 +52,21 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       {/* Video / Thumbnail area */}
       <div className={`relative aspect-video bg-gradient-to-br ${project.thumbnailColor} flex items-center justify-center`}>
 {showVideo && project.videoUrl ? (
-          project.videoUrl.endsWith('.mp4') ? (
- <video
-              src={project.videoUrl}
-              className="absolute inset-0 w-full h-full object-cover"
-              controls
-              preload="metadata"
-              playsInline
-              title={project.title}
-            >
-              <source src={project.videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> 
-          ) : (
-            <iframe
-              src={project.videoUrl}
-              className="absolute inset-0 w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title={project.title}
-            />
-          )
+          <video
+            src={project.videoUrl}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            controls
+            muted
+            autoPlay
+            loop
+            preload="metadata"
+            playsInline
+            onError={() => setShowVideo(false)}
+            title={project.title}
+          >
+            <source src={project.videoUrl} type="video/mp4" />
+            Video unavailable
+          </video>
         ) : (
           <>
             <span className="font-display text-2xl font-bold opacity-20">{project.title}</span>

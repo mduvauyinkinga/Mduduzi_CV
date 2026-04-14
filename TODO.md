@@ -1,13 +1,9 @@
-# Secure Email Form with Formspree - Progress Tracker
-
-**Status: Form updated with endpoint https://formspree.io/f/xeevqbvr, validation, honeypot. No errors found.
+# Video Fix Progress
 
 ## Steps:
-1. [✅] User provides Formspree endpoint.
-2. [✅] Edit ContactForm.tsx: Replace EmailJS with Formspree POST.
-3. [✅] Add validation/honeypot.
-4. [ ] Update TODO_DEPLOY.md.
-5. [ ] Test: npm run dev, submit form.
-6. [ ] Lint/build/deploy.
+- [x] 1. Confirm plan and create TODO.md
+- [x] 2. Edit ProjectsSection.tsx to fix video URLs and player
+- [x] 3. Update TODO.md after edit
+- [x] 4. Test with `npm run dev` (copy Smokey Dreamz.mp4 to public/videos/ first)
+- [x] 5. Complete task
 
-**Result**: No errors. Form ready to test/deploy.
