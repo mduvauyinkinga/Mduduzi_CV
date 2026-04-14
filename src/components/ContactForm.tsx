@@ -85,8 +85,8 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
       {/* Honeypot field for spam protection - hidden from humans */}
       <input type="text" name="_gotcha" value="" style={{display: 'none'}} aria-hidden="true" tabIndex={-1} />
       <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-2">
-          Name
+      <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
+          Name *
         </label>
           <input
           id="name"
@@ -95,7 +95,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
           required
           value={formData.from_name}
           onChange={(e) => setFormData({ ...formData, from_name: e.target.value })}
-          className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:bg-muted disabled:text-muted-foreground"
           disabled={loading}
         />
       </div>
@@ -106,11 +106,11 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
           <input
           id="email"
           type="email"
-placeholder="Enter Email"
+          placeholder="Enter Email"
           required
           value={formData.from_email}
           onChange={(e) => setFormData({ ...formData, from_email: e.target.value })}
-          className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:bg-muted disabled:text-muted-foreground"
           disabled={loading}
         />
       </div>
@@ -125,7 +125,7 @@ placeholder="Enter Email"
           required
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-vertical"
+          className="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary resize-vertical transition-all disabled:bg-muted disabled:text-muted-foreground"
           disabled={loading}
         />
       </div>
