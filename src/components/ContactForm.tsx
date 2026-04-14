@@ -69,7 +69,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
       } else {
         throw new Error('Form submission failed');
       }
-    } catch (error) {
+
       toast({
         title: "Error",
         description: "Failed to send message. Please try again later.",

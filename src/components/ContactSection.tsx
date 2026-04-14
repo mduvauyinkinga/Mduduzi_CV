@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const socials = [
 { icon: Mail, href: "mailto:dnmduduzi@gmail.com", label: "Email" },
