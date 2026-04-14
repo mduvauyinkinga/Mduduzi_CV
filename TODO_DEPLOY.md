@@ -6,5 +6,6 @@ npm# Deployment Preparation Progress
 - [x] Step 3: vite.config.ts - Remove unused mode, add base: './'
 - [x] Step 4: src/pages/NotFound.tsx - Remove unused imports/vars
 - [x] Step 5: Update README.md - Add deployment instructions
-- [ ] Step 6: Test lint/build/preview
+- [x] Step 6: Test lint/build/preview
+- [ ] Step 7: Add Privacy Policy (public/privacy.html) and Terms (public/terms.html) - Link in footer/nav
 

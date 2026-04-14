@@ -20,8 +20,11 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
     e.preventDefault();
     setLoading(true);
 
-    // Basic validation
-    if (!formData.from_name.trim() || !formData.from_email.trim() || !formData.message.trim()) {
+    // Sanitize inputs (remove HTML/script, limit length)
+    const sanitizedName = formData.from_name.trim().replace(/[<>]/g, '').slice(0, 100);
+    const sanitizedEmail = formData.from_email.trim().slice(0, 100);
+    const sanitizedMessage = formData.from_message.trim().replace(/[<>]/g, '').slice(0, 2000);
+    if (!sanitizedName || !sanitizedEmail || !sanitizedMessage) {
       toast({
         title: "Error",
         description: "Please fill all fields.",
@@ -30,7 +33,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
       setLoading(false);
       return;
     }
-    if (!validateEmail(formData.from_email)) {
+    if (!validateEmail(sanitizedEmail)) {
       toast({
         title: "Error",
         description: "Please enter a valid email.",
@@ -42,9 +45,9 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeevqbvr';
 
     try {
       const fd = new FormData();
-      fd.append('from_name', formData.from_name);
-      fd.append('from_email', formData.from_email);
-      fd.append('message', formData.message);
+      fd.append('from_name', sanitizedName);
+      fd.append('from_email', sanitizedEmail);
+      fd.append('message', sanitizedMessage);
       // Honeypot (spam trap)
       fd.append('_gotcha', '');
 
